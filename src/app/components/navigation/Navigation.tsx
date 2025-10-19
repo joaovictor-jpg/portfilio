@@ -1,6 +1,8 @@
 import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "@/app/components/ui/button/button";
 import { useState, useEffect } from "react";
+import { MobileMenu } from "../ui/menuMobile/MobileMenu";
+import { navLinks } from "@/app/types/navigation";
 
 export function Navigation() {
     const [isDark, setIsDark] = useState(() => {
@@ -38,7 +40,7 @@ export function Navigation() {
 
     const renderThemeToggleButton = () => {
         if (!isMounted) {
-            return <div className="size-9" />; 
+            return <div className="size-9" />;
         }
 
         return (
@@ -64,15 +66,13 @@ export function Navigation() {
                     </div>
 
                     <div className="hidden md:flex items-center gap-1">
-                        <Button variant="ghost" asChild>
-                            <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
-                        </Button>
-                        <Button variant="ghost" asChild>
-                            <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
-                        </Button>
-                        <Button variant="ghost" asChild>
-                            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
-                        </Button>
+                        {
+                            navLinks.map((link) => (
+                                <Button key={link.id} variant="ghost" asChild>
+                                    <a href={`#${link.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}>{link.label}</a>
+                                </Button>
+                            ))
+                        }
                         {renderThemeToggleButton()}
                     </div>
 
@@ -83,6 +83,8 @@ export function Navigation() {
                             size="icon"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
+                            aria-expanded={isMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             <Menu className="h-5 w-5" />
                         </Button>
@@ -90,17 +92,7 @@ export function Navigation() {
                 </div>
 
                 {isMenuOpen && (
-                    <div className="md:hidden pb-4 flex flex-col items-start gap-1">
-                        <Button variant="ghost" asChild className="w-full justify-start">
-                            <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
-                        </Button>
-                        <Button variant="ghost" asChild className="w-full justify-start">
-                            <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
-                        </Button>
-                        <Button variant="ghost" asChild className="w-full justify-start">
-                            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
-                        </Button>
-                    </div>
+                    <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} />
                 )}
             </div>
         </nav>
