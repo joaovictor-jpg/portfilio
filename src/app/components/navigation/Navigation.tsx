@@ -83,6 +83,8 @@ export function Navigation() {
                             size="icon"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
+                            aria-expanded={isMenuOpen}
+                            aria-controls="mobile-menu"
                         >
                             <Menu className="h-5 w-5" />
                         </Button>
@@ -90,7 +92,7 @@ export function Navigation() {
                 </div>
 
                 {isMenuOpen && (
-                    <div className="md:hidden pb-4 flex flex-col items-start gap-1">
+                    <div id="mobile-menu" className="md:hidden pb-4 flex flex-col items-start gap-1">
                         <Button variant="ghost" asChild className="w-full justify-start">
                             <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
                         </Button>
