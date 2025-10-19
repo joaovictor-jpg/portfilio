@@ -15,8 +15,10 @@ export function Navigation() {
     useEffect(() => {
         if (isDark) {
             document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
         } else {
             document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
         }
     }, [isDark]);
 
@@ -38,25 +40,16 @@ export function Navigation() {
                         </h3>
                     </div>
 
-                    <div className="hidden md:flex items-center gap-6">
-                        <button
-                            onClick={() => scrollToSection("about")}
-                            className="text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            About
-                        </button>
-                        <button
-                            onClick={() => scrollToSection("skills")}
-                            className="text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            Skills
-                        </button>
-                        <button
-                            onClick={() => scrollToSection("contact")}
-                            className="text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            Contact
-                        </button>
+                    <div className="hidden md:flex items-center gap-1">
+                        <Button variant="ghost" asChild>
+                            <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
+                        </Button>
+                        <Button variant="ghost" asChild>
+                            <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
+                        </Button>
+                        <Button variant="ghost" asChild>
+                            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
+                        </Button>
                         <Button
                             variant="ghost"
                             size="icon"
@@ -88,25 +81,16 @@ export function Navigation() {
                 </div>
 
                 {isMenuOpen && (
-                    <div className="md:hidden pb-4 flex flex-col gap-3">
-                        <button
-                            onClick={() => scrollToSection("about")}
-                            className="text-left py-2 text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            About
-                        </button>
-                        <button
-                            onClick={() => scrollToSection("skills")}
-                            className="text-left py-2 text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            Skills
-                        </button>
-                        <button
-                            onClick={() => scrollToSection("contact")}
-                            className="text-left py-2 text-foreground/80 hover:text-foreground transition-colors"
-                        >
-                            Contact
-                        </button>
+                    <div className="md:hidden pb-4 flex flex-col items-start gap-1">
+                        <Button variant="ghost" asChild className="w-full justify-start">
+                            <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
+                        </Button>
+                        <Button variant="ghost" asChild className="w-full justify-start">
+                            <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
+                        </Button>
+                        <Button variant="ghost" asChild className="w-full justify-start">
+                            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
+                        </Button>
                     </div>
                 )}
             </div>
