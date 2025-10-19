@@ -2,6 +2,13 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "@/app/components/ui/button/button";
 import { useState, useEffect } from "react";
 import { MobileMenu } from "../ui/menuMobile/MobileMenu";
+import type { SectionNavLink } from "@/app/types/navigation";
+
+const navLinks: SectionNavLink[] = [
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "contact", label: "Contact" },
+];
 
 export function Navigation() {
     const [isDark, setIsDark] = useState(() => {
@@ -39,7 +46,7 @@ export function Navigation() {
 
     const renderThemeToggleButton = () => {
         if (!isMounted) {
-            return <div className="size-9" />; 
+            return <div className="size-9" />;
         }
 
         return (
@@ -65,15 +72,13 @@ export function Navigation() {
                     </div>
 
                     <div className="hidden md:flex items-center gap-1">
-                        <Button variant="ghost" asChild>
-                            <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
-                        </Button>
-                        <Button variant="ghost" asChild>
-                            <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
-                        </Button>
-                        <Button variant="ghost" asChild>
-                            <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
-                        </Button>
+                        {
+                            navLinks.map((link) => (
+                                <Button key={link.id} variant="ghost" asChild>
+                                    <a href={`#${link.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}>{link.label}</a>
+                                </Button>
+                            ))
+                        }
                         {renderThemeToggleButton()}
                     </div>
 
@@ -93,7 +98,7 @@ export function Navigation() {
                 </div>
 
                 {isMenuOpen && (
-                    <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} />
+                    <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} navLinks={navLinks} />
                 )}
             </div>
         </nav>

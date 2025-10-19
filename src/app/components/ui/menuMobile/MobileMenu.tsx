@@ -1,12 +1,13 @@
 import { Button } from "@/app/components/ui/button/button";
-import { Menu } from "lucide-react";
+import type { SectionNavLink } from "@/app/types/navigation";
 
 export interface MobileMenuProps {
     isMenuOpen: boolean;
     scrollToSection: (id: string) => void;
+    navLinks: SectionNavLink[];
 }
 
-export function MobileMenu({ isMenuOpen, scrollToSection }: MobileMenuProps) {
+export function MobileMenu({ isMenuOpen, scrollToSection, navLinks }: Readonly<MobileMenuProps>) {
     if (!isMenuOpen) {
         return null;
     }
@@ -16,15 +17,13 @@ export function MobileMenu({ isMenuOpen, scrollToSection }: MobileMenuProps) {
             id="mobile-menu"
             className="md:hidden pb-4 flex flex-col items-start gap-1"
         >
-            <Button variant="ghost" asChild className="w-full justify-start">
-                <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection("about"); }}>About</a>
-            </Button>
-            <Button variant="ghost" asChild className="w-full justify-start">
-                <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection("skills"); }}>Skills</a>
-            </Button>
-            <Button variant="ghost" asChild className="w-full justify-start">
-                <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
-            </Button>
+            {
+                navLinks.map((link) => (
+                    <Button key={link.id} variant="ghost" asChild>
+                        <a href={`#${link.id}`} onClick={(e) => { e.preventDefault(); scrollToSection(link.id); }}>{link.label}</a>
+                    </Button>
+                ))
+            }
         </div>
     );
 }
