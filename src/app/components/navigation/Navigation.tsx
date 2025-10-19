@@ -2,13 +2,7 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "@/app/components/ui/button/button";
 import { useState, useEffect } from "react";
 import { MobileMenu } from "../ui/menuMobile/MobileMenu";
-import type { SectionNavLink } from "@/app/types/navigation";
-
-const navLinks: SectionNavLink[] = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "contact", label: "Contact" },
-];
+import { navLinks } from "@/app/types/navigation";
 
 export function Navigation() {
     const [isDark, setIsDark] = useState(() => {
@@ -98,7 +92,7 @@ export function Navigation() {
                 </div>
 
                 {isMenuOpen && (
-                    <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} navLinks={navLinks} />
+                    <MobileMenu isMenuOpen={isMenuOpen} scrollToSection={scrollToSection} />
                 )}
             </div>
         </nav>

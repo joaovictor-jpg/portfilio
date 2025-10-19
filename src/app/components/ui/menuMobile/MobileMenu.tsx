@@ -1,13 +1,12 @@
 import { Button } from "@/app/components/ui/button/button";
-import type { SectionNavLink } from "@/app/types/navigation";
+import { navLinks } from "@/app/types/navigation";
 
 export interface MobileMenuProps {
     isMenuOpen: boolean;
     scrollToSection: (id: string) => void;
-    navLinks: SectionNavLink[];
 }
 
-export function MobileMenu({ isMenuOpen, scrollToSection, navLinks }: Readonly<MobileMenuProps>) {
+export function MobileMenu({ isMenuOpen, scrollToSection}: Readonly<MobileMenuProps>) {
     if (!isMenuOpen) {
         return null;
     }
