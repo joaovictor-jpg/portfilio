@@ -1,5 +1,5 @@
 import { Menu, Moon, Sun } from "lucide-react";
-import { Button } from "@/app/components/ui/button/button"
+import { Button } from "@/app/components/ui/button/button";
 import { useState, useEffect } from "react";
 
 export function Navigation() {
@@ -11,6 +11,12 @@ export function Navigation() {
         return savedTheme === "dark";
     });
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         if (isDark) {
@@ -28,6 +34,23 @@ export function Navigation() {
             element.scrollIntoView({ behavior: "smooth" });
             setIsMenuOpen(false);
         }
+    };
+
+    const renderThemeToggleButton = () => {
+        if (!isMounted) {
+            return <div className="size-9" />; 
+        }
+
+        return (
+            <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsDark(!isDark)}
+                aria-label="Toggle theme"
+            >
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+        );
     };
 
     return (
@@ -50,25 +73,11 @@ export function Navigation() {
                         <Button variant="ghost" asChild>
                             <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}>Contact</a>
                         </Button>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setIsDark(!isDark)}
-                            aria-label="Toggle theme"
-                        >
-                            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                        </Button>
+                        {renderThemeToggleButton()}
                     </div>
 
                     <div className="md:hidden flex items-center gap-2">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setIsDark(!isDark)}
-                            aria-label="Toggle theme"
-                        >
-                            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                        </Button>
+                        {renderThemeToggleButton()}
                         <Button
                             variant="ghost"
                             size="icon"
