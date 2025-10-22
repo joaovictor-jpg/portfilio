@@ -1,11 +1,14 @@
 'use client';
 import { Navigation } from "@/app/components/navigation/Navigation";
+import { Hero } from "@/app/components/hero/Hero";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <h1>Hello World - Jota</h1>
+      <main>
+        <Hero />
+      </main>
     </div>
   );
 }
