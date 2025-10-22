@@ -1,5 +1,7 @@
+'use client';
 import { Button } from "@/app/components/ui/button/button";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import { socialLinks } from "@/app/types/navigation";
 
 export function Hero() {
     const scrollToAbout = () => {
@@ -40,31 +42,18 @@ export function Hero() {
                 </div>
 
                 <div className="flex gap-4 justify-center">
-                    <Button variant="ghost" size="icon" asChild>
-                        <a
-                            href="https://github.com/joaovictor-jpg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                        >
-                            <Github className="h-5 w-5" />
-                        </a>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <a
-                            href="https://www.linkedin.com/in/joaoperfilv2/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                        >
-                            <Linkedin className="h-5 w-5" />
-                        </a>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <a href="mailto:joaovictormdasilva676@gmail.com" aria-label="Email">
-                            <Mail className="h-5 w-5" />
-                        </a>
-                    </Button>
+                    {socialLinks.map((link) => (
+                        <Button key={link.href} variant="ghost" size="icon" asChild>
+                            <a
+                                href={link.href}
+                                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                                rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                                aria-label={link.ariaLabel}
+                            >
+                                <link.IconComponent className="h-5 w-5" />
+                            </a>
+                        </Button>
+                    ))}
                 </div>
 
                 <div className="mt-16 animate-bounce">
