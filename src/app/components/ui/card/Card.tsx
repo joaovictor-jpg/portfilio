@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/app/components/ui/utils";
 
@@ -38,18 +39,22 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(({ classNam
 });
 CardHeader.displayName = "CardHeader";
 
-type CardTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+    asChild?: boolean;
+}
 
-const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(({ className, ...props }, ref) => {
-    return (
-        <h4
-            ref={ref}
-            data-slot="card-title"
-            className={cn("leading-none", className)}
-            {...props}
-        />
-    );
-});
+const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
+    ({ className, asChild = false, ...props }, ref) => {
+        const Comp = asChild ? Slot : "h4";
+        return (
+            <Comp
+                ref={ref}
+                data-slot="card-title"
+                className={cn("leading-none", className)}
+                {...props}
+            />
+        );
+    });
 CardTitle.displayName = "CardTitle";
 
 type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
@@ -85,7 +90,7 @@ CardAction.displayName = "CardAction";
 
 type CardContentProps = React.HTMLAttributes<HTMLDivElement>;
 
-const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(({ className, ...props }, ref) => { 
+const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(({ className, ...props }, ref) => {
     return (
         <div
             ref={ref}
@@ -99,7 +104,7 @@ CardContent.displayName = "CardContent";
 
 type CardFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
-const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(({ className, ...props }, ref) => { 
+const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(({ className, ...props }, ref) => {
     return (
         <div
             ref={ref}
