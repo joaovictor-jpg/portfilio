@@ -1,5 +1,5 @@
 import { Badge } from "@/app/components/ui/badge/Badge";
-import { Card } from "@/app/components/ui/card/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card/Card";
 import { skillCategories } from "./skillsData";
 
 export function Skills() {
@@ -16,23 +16,29 @@ export function Skills() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {skillCategories.map((category, index) => (
+                    {skillCategories.map((category) => (
                         <Card
-                            key={index}
-                            className="p-6 hover:shadow-lg transition-shadow duration-300 border-border"
+                            key={category.category}
+                            className="hover:shadow-lg transition-shadow duration-300 border-border"
                         >
-                            <h3 className="mb-4">{category.category}</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <Badge
-                                        key={skillIndex}
-                                        variant="outline"
-                                        className={category.color}
-                                    >
-                                        {skill}
-                                    </Badge>
-                                ))}
-                            </div>
+                            <CardHeader>
+                                <CardTitle asChild>
+                                    <h3>{category.category}</h3>
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="flex flex-wrap gap-2">
+                                    {category.skills.map((skill) => (
+                                        <Badge
+                                            key={skill}
+                                            variant="outline"
+                                            className={category.color}
+                                        >
+                                            {skill}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            </CardContent>
                         </Card>
                     ))}
                 </div>
