@@ -17,12 +17,12 @@ export const skillCategories: SkillCategory[] = [
     },
     {
         category: "Database",
-        skills: ["PostgreSQL", "MongoDB", "NoSQL", "Database Modeling", "SQL"],
+        skills: ["PostgreSQL", "MongoDB", "NoSQL", "MySQL", "SQL"],
         color: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20",
     },
     {
         category: "DevOps & Tools",
-        skills: ["Docker", "Git", "CI/CD", "Linux", "AWS"],
+        skills: ["Docker", "Git", "Linux", "AWS"],
         color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20",
     },
 ];
