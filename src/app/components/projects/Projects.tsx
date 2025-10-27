@@ -2,29 +2,9 @@ import { Card } from "@/app/components/ui/card/Card";
 import { Badge } from "@/app/components/ui/badge/Badge";
 import { Button } from "@/app/components/ui/button/button";
 import { Github, ExternalLink } from "lucide-react";
+import { projects } from "./projectsData";
 
 export function Projects() {
-    const projects = [
-        {
-            title: "Financias",
-            description:
-                "A comprehensive financial management application with a modern Next.js frontend and robust Java Spring Boot backend. Features include transaction tracking, budget management, and financial analytics.",
-            technologies: {
-                frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-                backend: ["Java", "Spring Boot", "PostgreSQL", "RESTful API"],
-            },
-            links: {
-                frontend: {
-                    github: "https://github.com/joaovictor-jpg/financias",
-                    label: "Frontend Repository",
-                },
-                backend: {
-                    github: "https://github.com/joaovictor-jpg/jota-s-finance",
-                    label: "Backend Repository",
-                },
-            },
-        },
-    ];
 
     return (
         <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
@@ -39,9 +19,9 @@ export function Projects() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-8">
-                    {projects.map((project, index) => (
+                    {projects.map((project) => (
                         <Card
-                            key={index}
+                            key={project.title}
                             className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-border"
                         >
                             <div className="p-8">
@@ -62,9 +42,9 @@ export function Projects() {
                                             </span>
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
-                                            {project.technologies.frontend.map((tech, techIndex) => (
+                                            {project.technologies.frontend.map((tech) => (
                                                 <Badge
-                                                    key={techIndex}
+                                                    key={tech}
                                                     variant="outline"
                                                     className="bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20"
                                                 >
